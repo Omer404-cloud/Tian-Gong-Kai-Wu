@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天工百物·三元配对</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 顶部区域：游戏名称 -->
+        <h1>天工百物·三元配对</h1>
+        
+        <!-- 信息显示区：分数、等级、消除行数、下一个方块预览 -->
+        <div class="info-display-area">
+            <div class="stats-container">
+                <div class="score">
+                    <h3>分数</h3>
+                    <p id="score">0</p>
+                </div>
+                <div class="level">
+                        <h3>关卡</h3>
+                        <p id="level">1</p>
+                </div>
+            </div>
+            <div class="next-piece">
+                <h3>下一个方块</h3>
+                <canvas id="nextPiece" width="120" height="120"></canvas>
+            </div>
+        </div>
+        
+        <!-- 主游戏区域：游戏画面和操作按钮 -->
+        <div class="main-game-area">
+            <!-- 游戏主区域：游戏实际运行的画面区域 -->
+            <div class="game-screen">
+                <canvas id="tetris" width="300" height="600"></canvas>
+            </div>
+            
+            <!-- 操作按钮区 -->
+            <div class="control-buttons">
+                <!-- 方向控制按钮 -->
+                <div class="direction-controls">
+                    <div class="horizontal-controls">
+                        <button id="leftButton" class="btn control-btn">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button id="downButton" class="btn control-btn">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <button id="rightButton" class="btn control-btn">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 功能按钮 -->
+                <div class="action-buttons">
+                    <button id="hardDropButton" class="btn action-btn">快速下落</button>
+                    <div class="game-control-buttons">
+                        <button id="startButton" class="btn action-btn">开始游戏</button>
+                    <button id="pauseButton" class="btn action-btn" disabled>暂停游戏</button>
+                    <button id="restartButton" class="btn action-btn">重新开始</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 游戏结束界面 -->
+        <div id="gameOver" class="game-over">
+            <h2>游戏结束</h2>
+            <p>最终得分: <span id="finalScore">0</span></p>
+            <p>消除行数: <span id="finalLines">0</span></p>
+            <button id="restartButton2" class="btn">重新开始</button>
+        </div>
+        
+        <!-- 确认对话框 -->
+        <div id="confirmDialog" class="confirm-dialog">
+            <div class="confirm-content">
+                <h3>确认重新开始</h3>
+                <p>是否确定要重新开始游戏？</p>
+                <div class="confirm-buttons">
+                    <button id="confirmYes" class="btn">确定</button>
+                    <button id="confirmNo" class="btn">取消</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 位置错误提示对话框 -->
+        <div id="positionDialog" class="confirm-dialog" style="display: none;">
+            <div class="confirm-content">
+                <h3>放置错误</h3>
+                <p id="errorMessage">该方块应放置在正确的位置！</p>
+                <div class="confirm-buttons">
+                    <button id="rememberButton" class="btn">记住了</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="test.js"></script>
+    <script src="sounds.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

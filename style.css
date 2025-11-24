@@ -1,0 +1,406 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 游戏容器 */
+.game-container {
+    text-align: center;
+    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* 信息显示区 */
+.info-display-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+/* 统计数据容器 */
+.stats-container {
+    display: flex;
+    gap: 20px;
+}
+
+/* 统一行高 */
+.score, .level, .next-piece {
+    line-height: 1.6;
+}
+
+/* 主游戏区域 */
+.main-game-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+/* 游戏屏幕 */
+.game-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 操作按钮区 - 垂直居中 */
+.control-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* 方向控制按钮 */
+.direction-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.rotate-btn {
+    background: linear-gradient(135deg, #e94560 0%, #ff9e7d 100%);
+}
+
+.horizontal-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #3a86ff 0%, #8338ec 100%);
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.control-btn svg {
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+}
+
+/* 功能按钮 */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.action-btn {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #4c956c 0%, #2a6f97 100%);
+}
+
+/* 暂停状态按钮样式 */
+.action-btn.paused {
+    background: linear-gradient(135deg, #f4d35e 0%, #ee9b00 100%);
+}
+
+.action-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.action-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.action-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+    border: 2px dashed #dc3545;
+}
+
+/* 游戏控制按钮 */
+.game-control-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+#hardDropButton {
+    background: linear-gradient(135deg, #ffbe0b 0%, #fb5607 100%);
+}
+
+/* 确认对话框 */
+.confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.confirm-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 30px;
+    border-radius: 12px;
+    border: 3px solid #e94560;
+    text-align: center;
+    min-width: 300px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.confirm-content h3 {
+    color: #e94560;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.confirm-content p {
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+    color: #f9f9f9;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.confirm-buttons .btn {
+    min-width: 100px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #e94560;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-board {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+canvas#tetris {
+    border: 3px solid #e94560;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 180px;
+}
+
+.next-piece {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #4c956c;
+}
+
+canvas#nextPiece {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.score, .level, .lines {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #4c956c;
+}
+
+.score p, .level p, .lines p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f9f9f9;
+}
+
+h3 {
+    color: #d6efc7;
+    margin-bottom: 5px;
+}
+
+.btn {
+    background: linear-gradient(135deg, #4c956c 0%, #2a6f97 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.game-over {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 3px solid #e94560;
+    display: none;
+    text-align: center;
+}
+
+.game-over h2 {
+    color: #e94560;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.game-over p {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+#restartButton {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+    .main-game-area {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    .info-display-area {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .stats-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    canvas#tetris {
+        width: 250px;
+        height: 500px;
+    }
+    
+    .stats-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .score, .level, .lines {
+        min-width: 200px;
+    }
+    
+    .control-btn {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .control-btn svg {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .action-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    .game-control-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    canvas#tetris {
+        width: 200px;
+        height: 400px;
+    }
+    
+    .control-btn {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .control-btn svg {
+        width: 30px;
+        height: 30px;
+    }
+}
